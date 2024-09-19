@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 # sales-cockpit
-Prototype
-=======
-=======
->>>>>>> 9f11f55 (init)
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
@@ -55,7 +50,3 @@ export default tseslint.config({
   },
 })
 ```
-<<<<<<< HEAD
->>>>>>> 9f11f55 (init)
-=======
->>>>>>> 9f11f55 (init)
