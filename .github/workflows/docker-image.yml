@@ -8,11 +8,14 @@ on:
 
 jobs:
 
-  build:
+  build_and_publish:
 
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v4
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag sales-cockpit:$(date +%s)
+      run: |
+       docker login --username udigtate --password ${{ secrets.GH_PAT }} ghcr.io
+       docker build . --tag ghcr.io/udigtate/sales-cockpit:latest
+       docker push ghcr.io/udigtate/sales-cockpit:latest
