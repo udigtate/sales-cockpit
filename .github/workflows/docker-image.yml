@@ -18,8 +18,6 @@ jobs:
       shell: bash
       run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
       id: extract_branch
-    - name: Next SemVers
-      uses: WyriHaximus/github-action-next-semvers@v1.2.1
     - name: Build the Docker image
       run: |
        docker login --username udigtate --password ${{ secrets.GH_PAT }} ghcr.io
