@@ -2,9 +2,9 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "test", "dev"]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "main", "test", "dev" ]
 
 jobs:
 
@@ -14,8 +14,14 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+    - name: Extract branch name
+      shell: bash
+      run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+      id: extract_branch
+    - name: Next SemVers
+      uses: WyriHaximus/github-action-next-semvers@v1.2.1
     - name: Build the Docker image
       run: |
        docker login --username udigtate --password ${{ secrets.GH_PAT }} ghcr.io
-       docker build . --tag ghcr.io/udigtate/sales-cockpit:latest
-       docker push ghcr.io/udigtate/sales-cockpit:latest
+       docker build . --tag ghcr.io/udigtate/sales-cockpit:${{ steps.extract_branch.outputs.branch }}:$(date +'%Y-%m-%d')
+       docker push ghcr.io/udigtate/sales-cockpit:${{ steps.extract_branch.outputs.branch }}:$(date +'%Y-%m-%d')
