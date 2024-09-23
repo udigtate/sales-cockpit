@@ -21,5 +21,5 @@ jobs:
     - name: Build the Docker image
       run: |
        docker login --username udigtate --password ${{ secrets.GH_PAT }} ghcr.io
-       docker build . --tag ghcr.io/udigtate/sales-cockpit:${{ steps.extract_branch.outputs.branch }}:$(date +'%Y-%m-%d')
-       docker push ghcr.io/udigtate/sales-cockpit:${{ steps.extract_branch.outputs.branch }}:$(date +'%Y-%m-%d')
+       docker build . --tag ghcr.io/udigtate/sales-cockpit:${{ steps.extract_branch.outputs.branch }}$(date +'%Y-%m-%d')
+       docker push ghcr.io/udigtate/sales-cockpit:${{ steps.extract_branch.outputs.branch }}$(date +'%Y-%m-%d')
